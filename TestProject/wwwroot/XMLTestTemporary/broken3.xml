@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0">
+	<channel>
+		<title>Broken Feed 3: Empty/No Items</title>
+		<!-- No <item> elements -->
+	</channel>
+</rss>

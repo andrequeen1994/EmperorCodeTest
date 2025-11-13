@@ -1,72 +1,137 @@
 ﻿@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels
 @using Umbraco.Extensions
+@* Added 2 new namespace imports to allow http requests for the xml feeds and parsing from linq to xml*@
+@using System.Net.Http
+@using System.Xml.Linq
 @inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContentModels.ExternalNewsPage>
 @{
     Layout = "master.cshtml";
 }
-
+@* ---- For the sake of the test, no pagination entered, but pulling raw data like this could slow the site right down trying to parse all the data. Quick fix, add CMS item "Max Items Per Page" and add pagination ---- *@
+@* ---- using https://localhost:44330/XMLTestTemporary/broken1.xml to run my own tests locally ---- *@
+@* ---- Thought CSP might break images but no errors throwing on my end, working as expected (for sanity sake "img-src 'self' https: data: blob:") ---- *@
+@* ---- Time taken - around an hour ---- *@
 @Html.Partial("~/Views/Partials/SectionHeader.cshtml")
-
 <section class="section">
+    <div class="container">
+        <div class="col-md-12">
+            <article>
+                @await Html.GetBlockGridHtmlAsync(Model, "bodyText")
+            </article>
+            @* ---- Removed hard coded values for the examples ---- *@
+            <div class="news-container">
+                @{
+                    @* ----  Get the feed URL from cms ---- *@
+                    var feedUrl = Model.Value<string>("sourceUrl");
+                    @* ---- create new list to hold the values ---- *@
+                    List<XElement> newsItems = new List<XElement>();
 
-  <div class="container">
-    <div class="col-md-12">
-      <article>
-        @await Html.GetBlockGridHtmlAsync(Model, "bodyText")
-      </article>
-      <div class="news-container">
+                    @* ---- ensure we have a feedUrl value ---- *@
+                    if (!string.IsNullOrWhiteSpace(feedUrl))
+                    {
+                        try
+                        {
+                            @* ---- Fetch the XML content asynchronously - avoids hanging ---- *@
+                            using var client = new HttpClient();
+                            var xmlContent = await client.GetStringAsync(feedUrl);
+                            @* ---- Parse the RSS XML document ---- *@
+                            var doc = XDocument.Parse(xmlContent);
+                            var items = doc.Descendants("item").ToList();
+                            @* ---- Sort items by publication date in descending order (newest first) as requested in spec; use fallback date for invalid entries (missing date entirely will break ordering) ---- *@
+                            // newsItems = items
+                            // .OrderByDescending(item => DateTime.Parse(item.Element("pubDate")?.Value ?? "1900-01-01T00:00:00Z"))
+                            // .ToList();
 
-        <article class="news-item">
-          <img src="/images/300.jpg" alt="Article Title">
-          <div class="news-content">
-            <h2>Article Title</h2>
-            <p class="date">12th November 2025</p>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas luctus feugiat dolor. Cras turpis turpis...</p>
-            <a href="#" class="read-more">read more</a>
-          </div>
-        </article>
-        <article class="news-item">
-          <img src="/images/300.jpg" alt="Article Title">
-          <div class="news-content">
-            <h2>Article Title</h2>
-            <p class="date">12th November 2025</p>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas luctus feugiat dolor. Cras turpis turpis...</p>
-            <a href="#" class="read-more">read more</a>
-          </div>
-        </article>
-        <article class="news-item">
-          <img src="/images/300.jpg" alt="Article Title">
-          <div class="news-content">
-            <h2>Article Title</h2>
-            <p class="date">12th November 2025</p>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas luctus feugiat dolor. Cras turpis turpis...</p>
-            <a href="#" class="read-more">read more</a>
-          </div>
-        </article>
-        <article class="news-item">
-          <img src="/images/300.jpg" alt="Article Title">
-          <div class="news-content">
-            <h2>Article Title</h2>
-            <p class="date">12th November 2025</p>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas luctus feugiat dolor. Cras turpis turpis...</p>
-            <a href="#" class="read-more">read more</a>
-          </div>
-        </article>
-        <article class="news-item">
-          <img src="/images/300.jpg" alt="Article Title">
-          <div class="news-content">
-            <h2>Article Title</h2>
-            <p class="date">12th November 2025</p>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas luctus feugiat dolor. Cras turpis turpis...</p>
-            <a href="#" class="read-more">read more</a>
-          </div>
-        </article>
+                            @* --- Found a problem with the above method while testing, where any non empty published dates but malformed, would cause the ordering to skip every item ---- *@
+                            newsItems = items
+                            .Where(item =>
+                            {
+                                try { DateTime.Parse(item.Element("pubDate")?.Value ?? "1900-01-01T00:00:00Z"); return true; }
+                                catch { return false; }
+                            })
+                            .OrderByDescending(item => DateTime.Parse(item.Element("pubDate")?.Value ?? "1900-01-01T00:00:00Z"))
+                            .ToList();
 
-      </div>
+
+                            @* if we wanted to include bad date items, could use the following *@
+                            newsItems = items
+                            .OrderByDescending(item =>
+                            {
+                                var safeDateStr = item.Element("pubDate")?.Value ?? "2025-01-01T00:00:00Z";
+                                try { return DateTime.Parse(safeDateStr); }
+                                catch { return DateTime.Parse("2025-01-01T00:00:00Z"); }  // Fallback for sorting
+                            })
+                            .ToList();
+
+                        }
+                        catch (Exception)
+                        {
+                            @* ---- In production would be good to have logging here to see whats catching ---- *@
+                            @* ---- Logger.LogError(ex, "Failed to fetch or parse news feed from {FeedUrl}", feedUrl); ---- *@
+                        }
+                    }
+                    @* If news items successfully fetched, render on page *@
+                    if (newsItems.Any())
+                    {
+                        foreach (var item in newsItems)
+                        {
+                            @* Extract fields from XML for displaying, include replacements for missing properties *@
+                            var title = item.Element("title")?.Value ?? "Untitled Article";
+                            var description = item.Element("description")?.Value ?? string.Empty;
+                            @* ---- Truncate description to 100 characters with ellipsis if longer as required by spec ---- *@
+                            var truncatedDesc = description.Length > 100
+                            ? description.Substring(0, 100) + "..."
+                            : description;
+                            @* ---- initial code - found it didn't render pubDate if malformed data that isn't a date ---- *@
+                            // var pubDateStr = item.Element("pubDate")?.Value ?? "2025-01-01T00:00:00Z";
+                            // var pubDate = DateTime.Parse(pubDateStr);
+
+                            @* ---- using this code we can assign a default value in order to still display the item ---- *@
+                            var pubDateStr = item.Element("pubDate")?.Value ?? "2025-01-01T00:00:00Z";
+                            DateTime pubDate;
+                            try { pubDate = DateTime.Parse(pubDateStr); }
+                            catch { pubDate = DateTime.Parse("2025-01-01T00:00:00Z"); }  // Fallback for display
+
+                            var link = item.Element("link")?.Value ?? "#";
+                            var image = item.Element("image")?.Value ?? "/images/300.jpg"; @* ---- Fallback to placeholder in case imge missing ---*@
+
+                            @* ---- small custom function to add suffixes to days, ideal we would store this logic somewhere for re-usability  ---*@                                                               // Custom ordinal formatter
+                            string ToOrdinalSuffix(int day)
+                            {
+                                if (day % 100 >= 11 && day % 100 <= 13) return "th";
+                                return (day % 10) switch
+                                {
+                                    1 => "st",
+                                    2 => "nd",
+                                    3 => "rd",
+                                    _ => "th"
+                                };
+                            }
+                            @* ---- Format date as "12th November 2025" as required in spec ---- *@
+                            var formattedDate = $"{pubDate.Day}{ToOrdinalSuffix(pubDate.Day)} {pubDate:MMMM yyyy}";
+                            @* ---- Render the article HTML using existing CSS classes from example ---- *@
+                            <article class="news-item">
+                                <img src="@image" alt="@title">
+                                <div class="news-content">
+                                    <h2>@title</h2>
+                                    <p class="date">@formattedDate</p>
+                                    <p>@Html.Raw(truncatedDesc)</p>
+                                    <a href="@link" class="read-more" target="_blank" rel="noopener">read more</a>
+                                </div>
+                            </article>
+                        }
+                    }
+                    else
+                    {
+                        @* ---- Fallback message when no items are available (e.g. invalid URL in cms or fetch failure) ---- *@
+                        <p>No news articles available at this time. Please check the feed source.</p>
+                    }
+                }
+            </div>
+        </div>
     </div>
-  </div>
-
 </section>
 
 <link rel="stylesheet" href="@Url.Content("~/css/umbraco-starterkit-blockgrid.css")" />
 <link rel="stylesheet" href="@Url.Content("~/css/newslist.css")" />
+

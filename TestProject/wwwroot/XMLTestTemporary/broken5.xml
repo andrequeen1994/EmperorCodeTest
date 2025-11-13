@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0">
+	<channel>
+		<title>Broken Feed 5: Huge Descriptions</title>
+		<item>
+			<title>Item 1</title>
+			<description>A very long description that repeats for testing truncation and perf: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</description>
+			<pubDate>2025-11-01T00:00:00Z</pubDate>
+			<link>https://example.com/item1</link>
+			<image>https://example.com/img1.jpg</image>
+		</item>
+		<item>
+			<title>Item 2</title>
+			<description>A very long description that repeats for testing truncation and perf: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</description>
+			<pubDate>2025-11-02T00:00:00Z</pubDate>
+			<link>https://example.com/item2</link>
+			<image>https://example.com/img2.jpg</image>
+		</item>
+		<item>
+			<title>Item 3</title>
+			<description>A very long description that repeats for testing truncation and perf: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</description>
+			<pubDate>2025-11-03T00:00:00Z</pubDate>
+			<link>https://example.com/item3</link>
+			<image>https://example.com/img3.jpg</image>
+		</item>
+		<item>
+			<title>Item 4</title>
+			<description>A very long description that repeats for testing truncation and perf: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</description>
+			<pubDate>2025-11-04T00:00:00Z</pubDate>
+			<link>https://example.com/item4</link>
+			<image>https://example.com/img4.jpg</image>
+		</item>
+		<item>
+			<title>Item 5</title>
+			<description>A very long description that repeats for testing truncation and perf: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</description>
+			<pubDate>2025-11-05T00:00:00Z</pubDate>
+			<link>https://example.com/item5</link>
+			<image>https://example.com/img5.jpg</image>
+		</item>
+		<item>
+			<title>Item 6</title>
+			<description>A very long description that repeats for testing truncation and perf: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</description>
+			<pubDate>2025-11-06T00:00:00Z</pubDate>
+			<link>https://example.com/item6</link>
+			<image>https://example.com/img6.jpg</image>
+		</item>
+		<item>
+			<title>Item 7</title>
+			<description>A very long description that repeats for testing truncation and perf: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</description>
+			<pubDate>2025-11-07T00:00:00Z</pubDate>
+			<link>https://example.com/item7</link>
+			<image>https://example.com/img7.jpg</image>
+		</item>
+		<item>
+			<title>Item 8</title>
+			<description>A very long description that repeats for testing truncation and perf: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</description>
+			<pubDate>2025-11-08T00:00:00Z</pubDate>
+			<link>https://example.com/item8</link>
+			<image>https://example.com/img8.jpg</image>
+		</item>
+		<item>
+			<title>Item 9</title>
+			<description>A very long description that repeats for testing truncation and perf: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</description>
+			<pubDate>2025-11-09T00:00:00Z</pubDate>
+			<link>https://example.com/item9</link>
+			<image>https://example.com/img9.jpg</image>
+		</item>
+		<item>
+			<title>Item 10</title>
+			<description>A very long description that repeats for testing truncation and perf: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</description>
+			<pubDate>2025-11-10T00:00:00Z</pubDate>
+			<link>https://example.com/item10</link>
+			<image>https://example.com/img10.jpg</image>
+		</item>
+	</channel>
+</rss>

@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0">
+	<channel>
+		<title>Broken Feed 1: Malformed XML</title>
+		<item>
+			<title>Bad Item</title>
+			<description>Unclosed tag test</description>
+			<pubDate>2025-11-01T00:00:00Z</pubDate>
+			<link>https://example.com/bad</link>
+			<image>https://example.com/img.jpg</image>
+		</item>
+		<unclosed>
+		</channel>
+</rss>

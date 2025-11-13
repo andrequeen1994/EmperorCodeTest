@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0">
+	<channel>
+		<title>Broken Feed 4: Missing Channel</title>
+	</channel>
+	<item>
+		<title>Orphan Item</title>
+		<description>Missing structure</description>
+		<pubDate>2025-11-05T00:00:00Z</pubDate>
+		<link>https://example.com/orphan</link>
+	</item>
+</rss>
