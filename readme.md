@@ -7,9 +7,9 @@ Admin login: *admin@admin.com / MW>Y5XSxG?*
 
 ## Objective
 Integrate this XML feed 
-https://raw.githubusercontent.com/CiderPunk/EmperorCodeTest/refs/heads/main/xmlfeed/news_feed.xml
+https://raw.githubusercontent.com/EmperorWorks/EmperorCodeTest/refs/heads/main/xmlfeed/news_feed.xml
 
-into this umbraco page https://localhost:44330/news/ 
+into this umbraco page https://localhost:44330/news/  (the port may differ on your version!)
 
 The feed URL should be manageable in the CMS, usie the existing property or move it if it makes sense 
 
