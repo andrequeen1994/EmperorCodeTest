@@ -1,0 +1,72 @@
+﻿@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels
+@using Umbraco.Extensions
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContentModels.ExternalNewsPage>
+@{
+    Layout = "master.cshtml";
+}
+
+@Html.Partial("~/Views/Partials/SectionHeader.cshtml")
+
+<section class="section">
+
+  <div class="container">
+    <div class="col-md-12">
+      <article>
+        @await Html.GetBlockGridHtmlAsync(Model, "bodyText")
+      </article>
+      <div class="news-container">
+
+        <article class="news-item">
+          <img src="https://placecats.com/400/300" alt="Article Title">
+          <div class="news-content">
+            <h2>Article Title</h2>
+            <p class="date">12th November 2025</p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas luctus feugiat dolor. Cras turpis turpis...</p>
+            <a href="#" class="read-more">read more</a>
+          </div>
+        </article>
+        <article class="news-item">
+          <img src="https://placecats.com/400/300" alt="Article Title">
+          <div class="news-content">
+            <h2>Article Title</h2>
+            <p class="date">12th November 2025</p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas luctus feugiat dolor. Cras turpis turpis...</p>
+            <a href="#" class="read-more">read more</a>
+          </div>
+        </article>
+        <article class="news-item">
+          <img src="https://placecats.com/400/300" alt="Article Title">
+          <div class="news-content">
+            <h2>Article Title</h2>
+            <p class="date">12th November 2025</p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas luctus feugiat dolor. Cras turpis turpis...</p>
+            <a href="#" class="read-more">read more</a>
+          </div>
+        </article>
+        <article class="news-item">
+          <img src="https://placecats.com/400/300" alt="Article Title">
+          <div class="news-content">
+            <h2>Article Title</h2>
+            <p class="date">12th November 2025</p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas luctus feugiat dolor. Cras turpis turpis...</p>
+            <a href="#" class="read-more">read more</a>
+          </div>
+        </article>
+        <article class="news-item">
+          <img src="https://placecats.com/400/300" alt="Article Title">
+          <div class="news-content">
+            <h2>Article Title</h2>
+            <p class="date">12th November 2025</p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas luctus feugiat dolor. Cras turpis turpis...</p>
+            <a href="#" class="read-more">read more</a>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<link rel="stylesheet" href="@Url.Content("~/css/umbraco-starterkit-blockgrid.css")" />
+<link rel="stylesheet" href="@Url.Content("~/css/newslist.css")" />
